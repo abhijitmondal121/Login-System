@@ -3,6 +3,7 @@ $showAlert = false;
 $showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'partials/_dbconect.php';
+    $email = $_POST["email"];
     $username = $_POST["username"];
     $password = md5($_POST["password"]);
     $cpassword = md5($_POST["cpassword"]);
@@ -10,7 +11,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(($password == $cpassword) && $exists==false){
         // INSERT INTO `users1` (`slno`, `username`, `password`, `doj`) VALUES (NULL, 'ravi', '12', current_timestamp());
 
-        $sql = "INSERT INTO `users1` ( `username`, `password`) VALUES ('$username', '$password')";
+        $sql = "INSERT INTO `users1` (`email`, `username`, `password`) VALUES ( '$email', '$username', '$password')";
+        
+        // INSERT INTO `users1` ( `username`, `password`) VALUES ('$username', '$password')";
         $result = mysqli_query($conn, $sql);
         if ($result){
             $showAlert = true;
@@ -67,6 +70,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container my-4">
      <h1 class="text-center">Signup to our website</h1>
      <form action="/loginsystem/signup.php" method="post">
+     <div class="form-group">
+            <label for="username">Email</label>
+            <input type="email" class="form-control" id="username" name="email" aria-describedby="emailHelp">
+            
+        </div>
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">

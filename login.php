@@ -3,11 +3,12 @@ $login = false;
 $showError = false;
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     include 'partials/_dbconect.php';
+    $email = $_POST["email"];
     $username = $_POST["username"];
     $password = md5($_POST["password"]); 
     
      
-    $sql = "Select * from users1 where username='$username' AND password='$password'";
+    $sql = "Select * from users1 where email='$email' AND username='$username' AND password='$password'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
     if ($num == 1){
@@ -61,6 +62,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="container my-4">
      <h1 class="text-center">Login to our website</h1>
      <form action="/loginsystem/login.php" method="post">
+     <div class="form-group">
+            <label for="username">Email</label>
+            <input type="email" class="form-control" id="username" name="email" aria-describedby="emailHelp">
+            
+        </div>
+
+
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
