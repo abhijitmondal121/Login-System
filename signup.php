@@ -14,10 +14,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $result = mysqli_query($conn, $sql);
         if ($result){
             $showAlert = true;
+            
+
+
+
+
         }    
-        else{
-            echo "something went wrong";
-        }
+        // else{
+        //     echo "something went wrong";
+        // }
     }
     else{
         $showError = "Passwords do not match";
